@@ -1,5 +1,6 @@
 import requests
 import json
+import random
 
 class Multilinguist:
   """This class represents a world traveller who knows 
@@ -78,3 +79,52 @@ class Multilinguist:
     json_response = json.loads(response.text)
     return json_response['translationText']
 
+class MathGenius(Multilinguist):
+
+    def __init__(self):
+
+      self.current_lang = 'en'
+
+    def report_total(self, numbers = []):
+      
+        sum_of_numbers = sum(numbers)
+        return f'{self.say_in_local_language("The total is ")} + {sum_of_numbers}'
+
+class Quote_collector(Multilinguist):
+
+    def __init__(self):
+
+      self.current_lang = 'en'
+      self.quote_list = []
+
+    def add_quote(self, quote):
+
+      self.quote_list.append(quote)
+    
+    def random_quote(self):
+
+      quotation = random.choice(self.quote_list)
+      return self.say_in_local_language(quotation)
+
+python = Multilinguist()
+
+print(python.language_in("Canada"))
+print(python.say_in_local_language("What is up bro?"))
+
+me = MathGenius()
+print(me.report_total([23,45,676,34,5778,4,23,5465])) # The total is 12048
+me.travel_to("India")
+print(me.report_total([6,3,6,68,455,4,467,57,4,534])) # है को कुल 1604
+me.travel_to("Italy")
+print(me.report_total([324,245,6,343647,686545])) # È Il totale 1030767
+
+goku = Quote_collector()
+goku.add_quote("What's up dude?")
+goku.add_quote("Stay focused...")
+goku.add_quote("I must not give up")
+goku.travel_to("Italy")
+print(goku.random_quote())
+goku.travel_to("Japan")
+print(goku.random_quote())
+goku.travel_to("Brazil")
+print(goku.random_quote())
